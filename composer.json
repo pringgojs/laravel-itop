@@ -1,0 +1,28 @@
+{
+    "name": "pringgojs/laravel-itop",
+    "description": "Laravel package to integrate with iTop (DB-first) — forwarding and sync utilities.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pringgojs",
+            "email": "pringgoojs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pringgojs\\LaravelItop\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pringgojs\\LaravelItop\\LaravelItopServiceProvider"
+            ]
+        }
+    }
+}
