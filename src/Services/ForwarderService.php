@@ -3,12 +3,12 @@
 namespace Pringgojs\LaravelItop\Services;
 
 use Pringgojs\LaravelItop\Jobs\ForwardTicketJob;
-use Illuminate\Contracts\Queue\Dispatcher as QueueDispatcher;
+use Illuminate\Contracts\Queue\Factory as QueueFactory;
 
 class ForwarderService
 {
     protected $app;
-    protected QueueDispatcher $queue;
+    protected QueueFactory $queue;
 
     public function __construct($app)
     {

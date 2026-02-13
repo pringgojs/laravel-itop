@@ -2,10 +2,11 @@
 
 namespace Pringgojs\LaravelItop\Jobs;
 
-use Pringgojs\LaravelItop\Clients\DbItopClient;
-use Pringgojs\LaravelItop\Models\ItopSyncLog;
-use Pringgojs\LaravelItop\Models\ItopSyncMapping;
 use Exception;
+use Illuminate\Support\Facades\DB;
+use Pringgojs\LaravelItop\Models\ItopSyncLog;
+use Pringgojs\LaravelItop\Clients\DbItopClient;
+use Pringgojs\LaravelItop\Models\ItopSyncMapping;
 
 class ForwardTicketJob
 {
