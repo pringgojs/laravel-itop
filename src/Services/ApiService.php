@@ -20,6 +20,7 @@ class ApiService
 
     public function callApi($jsonData = [])
     {
+        info($jsonData);
         $encodedCredentials = base64_encode($this->username . ':' . $this->password);
         $response = Http::withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',

@@ -1,6 +1,7 @@
 <?php
 namespace Pringgojs\LaravelItop\Traits;
 
+use Pringgojs\LaravelItop\Models\Attachment;
 use Pringgojs\LaravelItop\Models\Change;
 use Pringgojs\LaravelItop\Models\Contact;
 use Pringgojs\LaravelItop\Models\LnkContactToTicket;
@@ -56,5 +57,10 @@ trait HasTicketRelations
     public function caller()
     {
         return $this->belongsTo(Contact::class, 'caller_id');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('item_class', $this->finalclass);
     }
 }
