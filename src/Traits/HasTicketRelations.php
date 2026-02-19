@@ -32,7 +32,7 @@ trait HasTicketRelations
         return $this->hasOne(TicketIncident::class, 'id', 'id');
     }
 
-    /* yg punya change, adalah ticket dengan finalClass NormalChange, RoutineChange, EmergencyChange  */
+    /* yg punya change, adalah ticket dengan finalClass: NormalChange, RoutineChange, EmergencyChange  */
     public function ticketChange()
     {
         return $this->hasOne(Change::class, 'id', 'id');
