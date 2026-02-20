@@ -15,13 +15,28 @@ class TicketPayloadBuilder implements PayloadBuilderInterface
                 'org_id' => $fields['org_id'] ?? 1,
                 'caller_id' => $fields['caller_id'] ?? 2,
                 'title' => $fields['title'] ?? 'Title From API',
-                'description' => $fields['description'] ?? 'Desc From API',
-                'status' => $fields['status'] ?? 'new',
-                'public_log' => ['items' => $fields['public_log'] ?? []],
-                'private_log' => ['items' => $fields['private_log'] ?? []],
+                'description' => $fields['description'] ?? 'Desc From API'
             ],
         ];
 
+        if (isset($fields['status'])) {
+            $payload['fields']['status'] = $fields['status'];
+        }
+
+        if (isset($fields['key'])) {
+            $payload['key'] = $fields['key'];
+        }
+
+        if (isset($fields['public_log']) && is_array($fields['public_log'])) {
+            $payload['fields']['public_log'] = ['items' => $fields['public_log']];
+        }
+
+        if (isset($fields['private_log']) && is_array($fields['private_log'])) {
+            $payload['fields']['private_log'] = ['items' => $fields['private_log']];
+        }
+
         return $asJson ? json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : $payload;
     }
+
+    
 }

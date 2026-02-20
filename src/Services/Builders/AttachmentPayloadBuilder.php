@@ -4,9 +4,15 @@ namespace Pringgojs\LaravelItop\Services\Builders;
 
 use Pringgojs\LaravelItop\Utils\ArrayHelper;
 
+
 class AttachmentPayloadBuilder implements PayloadBuilderInterface
 {
     public static function payload(array $fields = [], bool $asJson = false)
+    {
+        return self::create($fields, $asJson);
+    }
+
+    public static function create(array $fields = [], bool $asJson = false)
     {
         $payload = [
             'operation' => $fields['operation'] ?? 'core/create',
@@ -87,6 +93,18 @@ class AttachmentPayloadBuilder implements PayloadBuilderInterface
                 $payload['fields']['contents'] = $normalizedContents;
             }
         }
+
+        return $asJson ? json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : $payload;
+    }
+
+    public static function delete(array $fields = [], bool $asJson = false)
+    {
+        $payload = [
+            'operation' => $fields['operation'] ?? 'core/delete',
+            'class' => $fields['class'] ?? 'Attachment',
+            'comment' => $fields['comment'] ?? 'delete attachment from API',
+            'key' => $fields['key'] ?? null,
+        ];
 
         return $asJson ? json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : $payload;
     }

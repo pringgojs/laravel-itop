@@ -4,7 +4,6 @@ namespace Pringgojs\LaravelItop\Services;
 
 use Pringgojs\LaravelItop\Services\Builders\TicketPayloadBuilder;
 use Pringgojs\LaravelItop\Services\Builders\AttachmentPayloadBuilder;
-use Pringgojs\LaravelItop\Services\ResponseNormalizer;
 
 class ItopServiceBuilder
 {
@@ -38,11 +37,11 @@ class ItopServiceBuilder
      */
     public static function payloadAttachmentCreate(array $fields = [], bool $asJson = false)
     {
-        return AttachmentPayloadBuilder::payload($fields, $asJson);
+        return AttachmentPayloadBuilder::create($fields, $asJson);
     }
 
-    public static function normalizeItopCreateResponse(array $resp): array
+    public static function payloadAttachmentDelete(array $fields = [], bool $asJson = false)
     {
-        return ResponseNormalizer::normalizeItopCreateResponse($resp);
+        return AttachmentPayloadBuilder::delete($fields, $asJson);
     }
 }
