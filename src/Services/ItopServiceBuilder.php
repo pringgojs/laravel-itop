@@ -4,6 +4,7 @@ namespace Pringgojs\LaravelItop\Services;
 
 use Pringgojs\LaravelItop\Services\Builders\TicketPayloadBuilder;
 use Pringgojs\LaravelItop\Services\Builders\AttachmentPayloadBuilder;
+use Pringgojs\LaravelItop\Services\Builders\TicketStatePayloadBuilder;
 
 class ItopServiceBuilder
 {
@@ -43,5 +44,10 @@ class ItopServiceBuilder
     public static function payloadAttachmentDelete(array $fields = [], bool $asJson = false)
     {
         return AttachmentPayloadBuilder::delete($fields, $asJson);
+    }
+
+    public static function payloadTicketUpdateState(array $fields = [], bool $asJson = false)
+    {
+        return TicketStatePayloadBuilder::payload($fields, $asJson);
     }
 }

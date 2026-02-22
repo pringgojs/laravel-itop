@@ -173,12 +173,11 @@ class Ticket extends Model
         $q->where('operational_status', Constants::TICKET_CLOSED);
     }
 
-    public function status()
+    public function status($raw = false)
     {
         $status = $this->ticketRequest->status ?? $this->ticketChange->status ?? $this->ticketIncident->status ?? $this->ticketProblem->status;
-        $status = ucwords(str_replace('_', ' ', $status));
-
-        return $status;
+        
+        return $raw ? $status :  ucwords(str_replace('_', ' ', $status));
         
         // return '<span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-500 text-white">'.$status.'</span>';
     }

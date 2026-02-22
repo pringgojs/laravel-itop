@@ -12,7 +12,23 @@ use Pringgojs\LaravelItop\Models\TicketRequest;
 
 trait HasTicketRelations
 {
-    
+    public function type()
+    {
+        switch ($this->finalclass) {
+            case 'UserRequest':
+                return $this->ticketRequest;
+            case 'Incident':
+                return $this->ticketIncident;
+            case 'Problem':
+                return $this->ticketProblem;
+            case 'NormalChange':
+            case 'RoutineChange':
+            case 'EmergencyChange':
+                return $this->ticketChange;
+            default:
+                return null;
+        }
+    }
     public function organization()
     {
         return $this->belongsTo(Organization::class, 'org_id');
