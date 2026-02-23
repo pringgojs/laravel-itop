@@ -11,13 +11,24 @@ class TicketPayloadBuilder implements PayloadBuilderInterface
             'comment' => $fields['comment'] ?? 'ticket created from API',
             'class' => $fields['class'] ?? 'UserRequest',
             'output_fields' => $fields['output_fields'] ?? 'id, ref, title, status',
-            'fields' => [
-                'org_id' => $fields['org_id'] ?? 1,
-                'caller_id' => $fields['caller_id'] ?? 2,
-                'title' => $fields['title'] ?? 'Title From API',
-                'description' => $fields['description'] ?? 'Desc From API'
-            ],
+            'fields' => [],
         ];
+
+        if (isset($fields['org_id'])) {
+            $payload['fields']['org_id'] = $fields['org_id'];
+        }
+
+        if (isset($fields['caller_id'])) {
+            $payload['fields']['caller_id'] = $fields['caller_id'];
+        }
+
+        if (isset($fields['title'])) {
+            $payload['fields']['title'] = $fields['title'];
+        }
+
+        if (isset($fields['description'])) {
+            $payload['fields']['description'] = $fields['description'];
+        }
 
         if (isset($fields['status'])) {
             $payload['fields']['status'] = $fields['status'];
