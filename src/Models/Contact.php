@@ -9,8 +9,6 @@ class Contact extends Model
 {
     use HasFactory;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
-
     protected $table = 'contact'; // Nama tabel
 
     /**

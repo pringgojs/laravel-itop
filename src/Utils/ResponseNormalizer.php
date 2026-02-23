@@ -1,6 +1,6 @@
 <?php
 
-namespace Pringgojs\LaravelItop\Services;
+namespace Pringgojs\LaravelItop\Utils;
 
 class ResponseNormalizer
 {

@@ -9,8 +9,6 @@ class Change extends Model
 {
     use HasFactory;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
-
     protected $table = 'change'; // Nama tabel
 
 }
