@@ -25,7 +25,7 @@ class TicketStatePayloadBuilder implements PayloadBuilderInterface
         }
 
         // Always ensure these keys are present in fields if set at top-level or in fields subarray
-        foreach (['agent_id', 'pending_reason', 'solution', 'resolution_code', 'user_commment'] as $k) {
+        foreach (['agent_id', 'pending_reason', 'solution', 'resolution_code', 'user_comment'] as $k) {
             if (isset($fields[$k])) {
                 $payload['fields'][$k] = $fields[$k];
             } elseif (isset($fields['fields'][$k])) {

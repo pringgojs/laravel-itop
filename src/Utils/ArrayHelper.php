@@ -30,6 +30,7 @@ class ArrayHelper
             'assigned' => 'ev_assign',
             'rejected' => 'ev_reject',
             'pending' => 'ev_pending',
+            'reopened' => 'ev_reopen',
         ];
     }
 
