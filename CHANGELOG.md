@@ -7,6 +7,12 @@ human-readable release notes.
 
 ## [Unreleased]
 
+### Added
+
+- Added numerous Eloquent models for iTop entities including Applicationsolution, Attachment, Brand, Businessprocess, Change, Contact, Contract, Document, Functionalci, Group, Licence, Location, Networkdevice, Organization, Patch, Server, Service, Software, Team, Ticket, Virtualmachine, Webapplication, and many more.
+- Added TicketPayloadBuilder and TicketStatePayloadBuilder services for building API payloads.
+- Added ArrayHelper utility for array operations.
+
 ## [1.0.0] - 2026-03-03
 
 ### Added

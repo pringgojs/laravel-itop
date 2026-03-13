@@ -3,6 +3,7 @@
   "description": "Small Laravel DB-first wrapper for iTop: models, API client and payload builders.",
   "type": "library",
   "license": "MIT",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "Pringgojs",
