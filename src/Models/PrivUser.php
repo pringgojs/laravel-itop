@@ -10,7 +10,5 @@ class PrivUser extends Model
 {
     use HasFactory, HasPublicLog;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
-
-    protected $table = 'priv_user'; // Nama tabel
+    protected $table = 'priv_user';
 }

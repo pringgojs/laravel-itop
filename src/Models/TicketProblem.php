@@ -9,7 +9,21 @@ class TicketProblem extends Model
 {
     use HasFactory;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
+    protected $table = 'ticket_problem';
 
-    protected $table = 'ticket_problem'; // Nama tabel
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function servicesubcategory()
+    {
+        return $this->belongsTo(Servicesubcategory::class, 'servicesubcategory_id');
+    }
+
+    public function relatedChange()
+    {
+        return $this->belongsTo(Change::class, 'related_change_id');
+    }
+
 }

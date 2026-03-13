@@ -2,56 +2,28 @@
 
 namespace Pringgojs\LaravelItop\Models;
 
-use App\Constants\Constants;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Pringgojs\LaravelItop\Services\SlaService;
+use Pringgojs\LaravelItop\Constants\Constants;
 use Pringgojs\LaravelItop\Traits\HasTicketRelations;
 
 class Ticket extends Model
 {
     use HasFactory, HasTicketRelations;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
+    protected $table = 'ticket';
 
-    protected $table = 'ticket'; // Nama tabel
-
-    public $timestamps = false;
-    
-    protected $fillable = [
-        'agent_l1_id',
-        'agent_l1_name',
-        'agent_l1_response_time',
-        'agent_l2_id',
-        'agent_l2_name',
-        'agent_l2_response_time',
-        'agent_l2_resolution_time',
-        'resolution_time_real',
-        'pending_time',
-        'sla_last_check',
-    ];
-
-    public function getSlaLastCheckAttribute($value)
+    public function scopeRef($q, $ref = null)
     {
-        // Ubah time zone dari UTC ke UTC+7
-        return $value ? Carbon::parse($value)->setTimezone('Asia/Jakarta') : null;
-    }
-
-    public function scopeRef($q, $ref)
-    {
-        if (! $ref) {
-            return;
-        }
+        if (!$ref)return;
 
         $q->where('ref', $ref);
     }
 
     public function scopeSearch($q, $search = null)
     {
-        if (! $search) {
-            return;
-        }
+        if (!$search) return;
 
         $q->where('ref', 'like', '%'.trim($search).'%')
             ->orWhere('title', 'like', '%'.trim($search).'%');
@@ -60,47 +32,6 @@ class Ticket extends Model
     public function scopeOrderByDefault($q)
     {
         $q->orderBy('start_date', 'desc');
-    }
-
-    public function scopeFilter($q, $params = [])
-    {
-        if (!$params) return;
-        
-        if ($params['search']) {
-            $q->search($params['search']);
-        }
-
-        if ($params['selectedOrg']) {
-            $q->whereIn('ticket.org_id', $params['selectedOrg']);
-        }
-
-        if ($params['selectedCaller']) {
-            $q->whereIn('ticket.caller_id', $params['selectedCaller']);
-        }
-
-        if ($params['selectedAgent']) {
-            $q->whereIn('ticket.agent_l1_id', $params['selectedAgent']);
-        }
-
-        if ($params['selectedAgentL2']) {
-            $q->whereIn('ticket.agent_l2_id', $params['selectedAgentL2']);
-        }
-        
-        if ($params['selectedTeam']) {
-            $q->whereIn('ticket.team_id', $params['selectedTeam']);
-        }
-
-        if ($params['selectedType']) {
-            $q->whereIn('ticket.finalclass', $params['selectedType']);
-        }
-
-        
-        if ($params['selectedStatus'] && $params['selectedType']) {
-            $q->status($params['selectedType'], $params['selectedStatus']);
-        }
-
-        /* date */
-        $q->date($params);
     }
 
     public function scopeStatus($q, $type = [], $status = [])
@@ -178,8 +109,6 @@ class Ticket extends Model
         $status = $this->ticketRequest->status ?? $this->ticketChange->status ?? $this->ticketIncident->status ?? $this->ticketProblem->status;
         
         return $raw ? $status :  ucwords(str_replace('_', ' ', $status));
-        
-        // return '<span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-500 text-white">'.$status.'</span>';
     }
     
     public function getPrivateLog() {
@@ -213,33 +142,4 @@ class Ticket extends Model
     
         return $data;
     }
-
-    public function recalculate()
-    {
-        $slaService = new SlaService($this);
-        if (!$slaService) return;
-
-
-        $agentL1 = $slaService->getAgentL1();
-        $agentL2 = $slaService->getAgentL2();
-
-        if (!$agentL1 && !$agentL2) {
-
-            return;
-        }            
-        
-        $this->update([
-            'agent_l1_id' => $agentL1['agent_id'] ?? 0,
-            'agent_l1_name' => $agentL1['agent'] ?? null,
-            'agent_l1_response_time' => $agentL1['response_time'] ?? 0,
-            'agent_l2_id' => $agentL2['agent_id'] ?? 0,
-            'agent_l2_name' => $agentL2['agent'] ?? null,
-            'agent_l2_response_time' => $agentL2['response_time'] ?? 0,
-            'agent_l2_resolution_time' => $agentL2['resolution_time'] ?? 0,
-            'resolution_time_real' => $agentL2['resolution_time_real'] ?? 0,
-            'pending_time' => $agentL2['pending_time'] ?? 0,
-            'sla_last_check' => Carbon::now()->setTimezone('UTC'),
-        ]);
-    }
-
 }

@@ -4,13 +4,36 @@ namespace Pringgojs\LaravelItop\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Pringgojs\LaravelItop\Traits\HasPublicLog;
 
 class TicketIncident extends Model
 {
-    use HasFactory, HasPublicLog;
+    use HasFactory;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
+    protected $table = 'ticket_incident';
 
-    protected $table = 'ticket_incident'; // Nama tabel
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function servicesubcategory()
+    {
+        return $this->belongsTo(Servicesubcategory::class, 'servicesubcategory_id');
+    }
+
+    public function parentIncident()
+    {
+        return $this->belongsTo(TicketIncident::class, 'parent_incident_id');
+    }
+
+    public function parentProblem()
+    {
+        return $this->belongsTo(TicketProblem::class, 'parent_problem_id');
+    }
+
+    public function parentChange()
+    {
+        return $this->belongsTo(Change::class, 'parent_change_id');
+    }
+
 }

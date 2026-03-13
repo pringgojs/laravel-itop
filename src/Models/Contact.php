@@ -9,22 +9,56 @@ class Contact extends Model
 {
     use HasFactory;
 
-    protected $table = 'contact'; // Nama tabel
+    protected $table = 'contact';
 
-    /**
-     * Relasi ke model Organization dengan foreign key org_id.
-     */
     public function organization()
     {
         return $this->belongsTo(Organization::class, 'org_id');
     }
 
-    /**
-     * Mengambil data dari model Person di mana kolom id pada contact sama dengan id di person.
-     */
     public function person()
     {
         return $this->hasOne(Person::class, 'id', 'id');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'contact_id');
+    }
+
+    public function lnkcontacttocontracts()
+    {
+        return $this->hasMany(Lnkcontacttocontract::class, 'contact_id');
+    }
+
+    public function lnkcontacttofunctionalcis()
+    {
+        return $this->hasMany(Lnkcontacttofunctionalci::class, 'contact_id');
+    }
+
+    public function lnkcontacttoservices()
+    {
+        return $this->hasMany(Lnkcontacttoservice::class, 'contact_id');
+    }
+
+    public function lnkcontacttotickets()
+    {
+        return $this->hasMany(Lnkcontacttoticket::class, 'contact_id');
+    }
+
+    public function lnkdeliverymodeltocontacts()
+    {
+        return $this->hasMany(Lnkdeliverymodeltocontact::class, 'contact_id');
+    }
+
+    public function privEventNewsrooms()
+    {
+        return $this->hasMany(PrivEventNewsroom::class, 'contact_id');
+    }
+
+    public function privLnkActionNotifToContacts()
+    {
+        return $this->hasMany(PrivLnkActionNotifToContact::class, 'contact_id');
     }
 
     public function scopeElitery($q)

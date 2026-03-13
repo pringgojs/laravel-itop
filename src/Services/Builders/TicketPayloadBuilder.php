@@ -38,6 +38,18 @@ class TicketPayloadBuilder implements PayloadBuilderInterface
             $payload['key'] = $fields['key'];
         }
 
+        if (isset($fields['impact'])) {
+            $payload['fields']['impact'] = $fields['impact'];
+        }
+
+        if (isset($fields['urgency'])) {
+            $payload['fields']['urgency'] = $fields['urgency'];
+        }
+
+        if (isset($fields['priority'])) {
+            $payload['fields']['priority'] = $fields['priority'];
+        }
+
         if (isset($fields['public_log']) && is_array($fields['public_log'])) {
             $payload['fields']['public_log'] = ['items' => $fields['public_log']];
         }

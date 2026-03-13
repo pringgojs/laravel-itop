@@ -9,9 +9,8 @@ class Organization extends Model
 {
     use HasFactory;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
 
-    protected $table = 'organization'; // Nama tabel
+    protected $table = 'organization';
     
     public function scopeOrderByDefault($q)
     {

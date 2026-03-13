@@ -9,6 +9,6 @@ class Change extends Model
 {
     use HasFactory;
 
-    protected $table = 'change'; // Nama tabel
+    protected $table = 'change';
 
 }

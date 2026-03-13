@@ -9,7 +9,15 @@ class LnkContactToTicket extends Model
 {
     use HasFactory;
 
-    // protected $connection = 'mysql2'; // Menggunakan koneksi mysql2
+    protected $table = 'lnkcontacttoticket';
+    
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id');
+    }
 
-    protected $table = 'lnkcontacttoticket'; // Nama tabel
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class, 'contact_id');
+    }
 }

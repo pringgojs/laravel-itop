@@ -31,6 +31,8 @@ class ArrayHelper
             'rejected' => 'ev_reject',
             'pending' => 'ev_pending',
             'reopened' => 'ev_reopen',
+            'escalated_ttr' => 'ev_escalated_ttr',
+            'escalated_tto' => 'ev_escalated_tto',
         ];
     }
 
