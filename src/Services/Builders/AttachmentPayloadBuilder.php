@@ -94,6 +94,10 @@ class AttachmentPayloadBuilder implements PayloadBuilderInterface
             }
         }
 
+        if (isset($fields['secret'])) {
+            $payload['fields']['secret'] = $fields['secret'];
+        }
+
         return $asJson ? json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : $payload;
     }
 

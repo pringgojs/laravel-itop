@@ -13,6 +13,7 @@ class Ticket extends Model
     use HasFactory, HasTicketRelations;
 
     protected $table = 'ticket';
+    public $timestamps = false;
 
     public function scopeRef($q, $ref = null)
     {
