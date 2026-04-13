@@ -50,6 +50,14 @@ class TicketPayloadBuilder implements PayloadBuilderInterface
             $payload['fields']['priority'] = $fields['priority'];
         }
 
+        if (isset($fields['service_id'])) {
+            $payload['fields']['service_id'] = $fields['service_id'];
+        }
+
+        if (isset($fields['servicesubcategory_id'])) {
+            $payload['fields']['servicesubcategory_id'] = $fields['servicesubcategory_id'];
+        }
+
         if (isset($fields['public_log']) && is_array($fields['public_log'])) {
             $payload['fields']['public_log'] = ['items' => $fields['public_log']];
         }
